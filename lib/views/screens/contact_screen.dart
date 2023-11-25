@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:us_building_client/views/layout/layout.dart';
 
 @RoutePage()
 class ContactScreen extends StatefulWidget {
@@ -12,9 +13,11 @@ class ContactScreen extends StatefulWidget {
 class _ContactScreenState extends State<ContactScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('Contact'),
+    return Layout(
+      body: Container(
+        child: Center(
+          child: Text('Contact'),
+        ),
       ),
     );
   }

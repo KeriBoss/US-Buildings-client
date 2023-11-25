@@ -9,4 +9,14 @@ abstract class ServiceEvent extends Equatable {
 
 class OnLoadServiceLv1ListEvent extends ServiceEvent {}
 
-class OnLoadServiceLv2ListEvent extends ServiceEvent {}
+class OnLoadServiceLv2ListEvent extends ServiceEvent {
+  final String serviceLv1Name;
+
+  const OnLoadServiceLv2ListEvent(this.serviceLv1Name);
+}
+
+class OnLoadServiceListEvent extends ServiceEvent {
+  final String serviceLv2Name;
+
+  const OnLoadServiceListEvent(this.serviceLv2Name);
+}

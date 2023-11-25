@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:us_building_client/bloc/service/service_bloc.dart';
 import 'package:us_building_client/core/extension/number_extension.dart';
 
 import '../../core/router/app_router_config.dart';
@@ -16,13 +14,6 @@ class IndexScreen extends StatefulWidget {
 
 class _IndexScreenState extends State<IndexScreen> {
   @override
-  void initState() {
-    context.read<ServiceBloc>().add(OnLoadServiceLv1ListEvent());
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return AutoTabsRouter.pageView(
       routes: const [
@@ -31,8 +22,9 @@ class _IndexScreenState extends State<IndexScreen> {
         ContactRoute(),
         AccountRoute(),
       ],
-      builder: (context, child, _) {
+      builder: (context, child, pageController) {
         final tabsRouter = AutoTabsRouter.of(context);
+
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
@@ -40,7 +32,7 @@ class _IndexScreenState extends State<IndexScreen> {
           body: child,
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
-            currentIndex: tabsRouter.activeIndex,
+            currentIndex: pageController.initialPage,
             onTap: tabsRouter.setActiveIndex,
             items: [
               BottomNavigationBarItem(
@@ -90,7 +82,10 @@ class _IndexScreenState extends State<IndexScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.radius),
                         ),
-                        child: const Icon(Icons.message_rounded),
+                        child: Icon(
+                          Icons.message_rounded,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                       ),
                       FloatingActionButton(
                         onPressed: () {},

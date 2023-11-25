@@ -7,14 +7,23 @@ import '../../services/network_service.dart';
 import '../static/enum/database_table_enum.dart';
 
 class ServiceRepository {
-  Future<Either<Failure, List<ServiceModel>>> getServiceLv1List() async {
+  Future<Either<Failure, List<ServiceModel>>> getServiceModelList(
+    DatabaseTableEnum databaseTable, {
+    Map<String, dynamic>? queryMap,
+  }) async {
     try {
       List<ServiceModel>? serviceList;
 
+      Map<String, dynamic> queryParams = {
+        'tablename': databaseTable.name,
+      };
+
+      if (queryMap != null) {
+        queryParams.addAll(queryMap);
+      }
+
       final response = await NetworkService.get(
-        queryParam: {
-          'tablename': DatabaseTableEnum.tbl_com_01_us_01_dvcap1.name,
-        },
+        queryParam: queryParams,
         url: '/list/',
       );
 

@@ -10,10 +10,9 @@ final appTheme = ThemeData(
   ),
   colorScheme: const ColorScheme(
     primary: Color(0xFF00C2F1),
-    // primary text color
     secondary: Colors.white,
-    onPrimary: Colors.white,
-    onSecondary: Colors.white,
+    onPrimary: Color(0xFF3B3C71),
+    onSecondary: Color(0xFFBEBEBF),
     error: Color(0xFFF54018),
     onError: Colors.black,
     onBackground: Colors.white,

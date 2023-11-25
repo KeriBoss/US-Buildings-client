@@ -14,6 +14,16 @@ class ServiceLoadingState extends ServiceState {
   List<Object?> get props => [];
 }
 
+class ServiceLv1ListLoadingState extends ServiceState {
+  @override
+  List<Object?> get props => [];
+}
+
+class ServiceLv2ListLoadingState extends ServiceState {
+  @override
+  List<Object?> get props => [];
+}
+
 class ServiceLv1ListLoadedState extends ServiceState {
   final List<ServiceModel> serviceLv1List;
 
@@ -30,6 +40,15 @@ class ServiceLv2ListLoadedState extends ServiceState {
 
   @override
   List<Object?> get props => [serviceLv2List];
+}
+
+class ServiceListLoadedState extends ServiceState {
+  final List<ServiceModel> serviceList;
+
+  const ServiceListLoadedState(this.serviceList);
+
+  @override
+  List<Object?> get props => [serviceList];
 }
 
 class ServiceErrorState extends ServiceState {

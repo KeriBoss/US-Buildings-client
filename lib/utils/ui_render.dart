@@ -28,10 +28,10 @@ class UiRender {
     );
   }
 
-  static Widget loadingCircle(BuildContext context) {
+  static Widget loadingCircle(BuildContext context, {Color? color}) {
     return Center(
       child: CircularProgressIndicator(
-        color: Theme.of(context).colorScheme.primary,
+        color: color ?? Theme.of(context).colorScheme.primary,
       ),
     );
   }
