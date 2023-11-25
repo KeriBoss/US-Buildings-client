@@ -44,8 +44,6 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   void initState() {
-    loadWebViewData();
-
     super.initState();
   }
 
@@ -66,7 +64,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
           onWebViewCreated: (WebViewController webViewController) {
             webviewController = webViewController;
           },
-          initialUrl: "https://keri.vn/",
+          initialUrl: "http://34.67.65.197:8080/usbuildings/",
           javascriptMode: JavascriptMode.unrestricted,
           onProgress: (int progress) {
             debugPrint('WebView is loading (progress : $progress%)');
@@ -77,7 +75,6 @@ class _WebViewScreenState extends State<WebViewScreen> {
           },
           onPageStarted: (String url) {
             debugPrint('Page started loading: $url');
-            loadWebViewData();
           },
           onPageFinished: (String url) {},
           gestureNavigationEnabled: true,
