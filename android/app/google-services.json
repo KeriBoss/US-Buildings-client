@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "15994186305",
+    "project_id": "us-building-client",
+    "storage_bucket": "us-building-client.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15994186305:android:90aee5683811fe3ba974c0",
+        "android_client_info": {
+          "package_name": "com.keri.us_building_client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsKJ8SzFR6bxsFVIeCw0T2MfycRfh10Sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

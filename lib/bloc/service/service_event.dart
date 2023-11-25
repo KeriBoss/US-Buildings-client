@@ -1,0 +1,12 @@
+part of 'service_bloc.dart';
+
+abstract class ServiceEvent extends Equatable {
+  const ServiceEvent();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class OnLoadServiceLv1ListEvent extends ServiceEvent {}
+
+class OnLoadServiceLv2ListEvent extends ServiceEvent {}

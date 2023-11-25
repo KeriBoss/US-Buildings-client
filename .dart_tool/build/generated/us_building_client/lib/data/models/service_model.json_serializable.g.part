@@ -1,0 +1,22 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+ServiceModel _$ServiceModelFromJson(Map<String, dynamic> json) => ServiceModel(
+      id: json['id'] as int,
+      createdDate: json['createdDate'] as String?,
+      serviceLv1Name: json['serviceLv1Name'] as String?,
+      iconUrl: json['iconUrl'] as String?,
+      description: json['description'] as String?,
+      userId: json['userId'] as int?,
+    );
+
+Map<String, dynamic> _$ServiceModelToJson(ServiceModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'createdDate': instance.createdDate,
+      'serviceLv1Name': instance.serviceLv1Name,
+      'iconUrl': instance.iconUrl,
+      'description': instance.description,
+      'userId': instance.userId,
+    };
