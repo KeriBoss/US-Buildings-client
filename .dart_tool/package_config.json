@@ -105,7 +105,7 @@
     },
     {
       "name": "built_value",
-      "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/built_value-8.7.0",
+      "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/built_value-8.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -204,6 +204,12 @@
       "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/dio-5.3.4",
       "packageUri": "lib/",
       "languageVersion": "2.15"
+    },
+    {
+      "name": "dotted_border",
+      "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/dotted_border-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "dropdown_textfield",
@@ -339,7 +345,7 @@
     },
     {
       "name": "flutter_local_notifications",
-      "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_local_notifications-16.1.0",
+      "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_local_notifications-16.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -508,6 +514,18 @@
     {
       "name": "path",
       "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/path-1.8.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_drawing",
+      "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/path_drawing-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_parsing",
+      "rootUri": "file:///Users/kericloud/.pub-cache/hosted/pub.dev/path_parsing-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -836,7 +854,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-11-25T08:06:19.421657Z",
+  "generated": "2023-11-27T11:37:27.500355Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }

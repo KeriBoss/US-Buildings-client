@@ -8,9 +8,9 @@ import '../../main.dart';
 
 @RoutePage()
 class WebViewScreen extends StatefulWidget {
-  const WebViewScreen({super.key, required this.code});
+  const WebViewScreen({super.key, this.url});
 
-  final String code;
+  final String? url;
 
   @override
   State<StatefulWidget> createState() => _WebViewScreenState();
@@ -26,8 +26,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   void loadWebViewData() async {
     try {
-      link = "$host/$code/$file";
-      // link = 'http://34.67.65.197:8080/usbuildings/';
+      link = widget.url ?? 'http://34.67.65.197:8080/usbuildings/';
       final response = await dio.get(link);
 
       if (response.statusCode == 200) {
@@ -44,6 +43,12 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   void initState() {
+    if (widget.url != null && widget.url!.isNotEmpty) {
+      context.read<WebviewBloc>().add(
+            OnLoadWebviewEvent(widget.url!),
+          );
+    }
+
     super.initState();
   }
 
@@ -64,7 +69,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
           onWebViewCreated: (WebViewController webViewController) {
             webviewController = webViewController;
           },
-          initialUrl: "http://34.67.65.197:8080/usbuildings/",
+          initialUrl: widget.url ?? 'http://34.67.65.197:8080/usbuildings/',
           javascriptMode: JavascriptMode.unrestricted,
           onProgress: (int progress) {
             debugPrint('WebView is loading (progress : $progress%)');
@@ -73,8 +78,14 @@ class _WebViewScreenState extends State<WebViewScreen> {
           navigationDelegate: (NavigationRequest request) {
             return NavigationDecision.navigate;
           },
-          onPageStarted: (String url) {
+          onPageStarted: (String url) async {
             debugPrint('Page started loading: $url');
+            if (url == "http://34.67.65.197:8080/usbuildings/" && count < 3) {
+              loadWebViewData();
+              setState(() {
+                count++;
+              });
+            }
           },
           onPageFinished: (String url) {},
           gestureNavigationEnabled: true,

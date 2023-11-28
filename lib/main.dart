@@ -22,8 +22,10 @@ import 'core/router/app_router_config.dart';
 import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
 
+const apiKey = 'AIzaSyAORtYhclWmVTCjaK9-rDJmNx0A4U7O7qY';
 const webServerKey =
     'AAAAA7lT6kE:APA91bEWMGqhsy3aaxQQLpEp37k8Tt622jWWrFZbfeujPl-fuxxSI0ihn-u6YbqKy_M7PJIs_rKbtpe-aAwYUPvoT7DZ_y5PdEszX8R-4Q0vmn9NnGwYQBtbwlO_vlesdyPM-XYZkYiz';
+
 final Dio dio = Dio();
 final AppRouter appRouter = AppRouter();
 
@@ -39,13 +41,33 @@ const androidChannel = AndroidNotificationChannel(
   importance: Importance.max,
 );
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 // handle event of message at background
 @pragma('vm:entry-point')
 Future<void> handleBackgroundMessage(RemoteMessage? message) async {
   FlutterAppBadger.updateBadgeCount(1);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // FirebaseMessageService.runWhileAppIsTerminated();
+  //
+  // await FirebaseMessageService.initFirebaseMessagePushNotifications();
+  // await FirebaseMessageService.initLocalNotifications();
+}
+
+@pragma('vm:entry-point')
+Future<void> handleBackgroundLocalMessage(NotificationResponse? res) async {
+  FlutterAppBadger.updateBadgeCount(1);
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // FirebaseMessageService.runWhileAppIsTerminated();
+  //
+  // await FirebaseMessageService.initNotifications();
 }
 
 Future<void> main() async {
@@ -59,6 +81,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // FirebaseMessageService.runWhileAppIsTerminated();
 
   runApp(
     MultiRepositoryProvider(
@@ -103,7 +127,6 @@ class _MyHomePageState extends State<MyApp> {
   @override
   void initState() {
     FirebaseMessageService(context).initNotifications();
-
     super.initState();
   }
 
@@ -115,6 +138,7 @@ class _MyHomePageState extends State<MyApp> {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp.router(
+          key: navigatorKey,
           routerConfig: appRouter.config(),
           debugShowCheckedModeBanner: false,
           theme: appTheme,

@@ -35,11 +35,11 @@ class _AccountScreenState extends State<AccountScreen> {
               buttonMargin: EdgeInsets.zero,
               onPress: () {
                 context.read<WebviewBloc>().add(
-                      OnLoadWebviewEvent(
-                          'http://34.67.65.197:8080/usbuildings/'),
+                      const OnLoadWebviewEvent(
+                          'http://34.67.65.197:8080/centerenglishapp'),
                     );
 
-                context.router.pushWidget(WebViewScreen(code: ''));
+                context.router.pushWidget(const WebViewScreen(url: ''));
               },
             ),
           ],

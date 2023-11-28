@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/us_building_client.iml" filepath="$PROJECT_DIR$/us_building_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/us_building_client_android.iml" filepath="$PROJECT_DIR$/android/us_building_client_android.iml" />
     </modules>
   </component>
 </project>

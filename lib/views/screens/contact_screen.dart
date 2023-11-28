@@ -15,7 +15,7 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget build(BuildContext context) {
     return Layout(
       body: Container(
-        child: Center(
+        child: const Center(
           child: Text('Contact'),
         ),
       ),

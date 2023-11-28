@@ -1,8 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:us_building_client/core/extension/number_extension.dart';
+import 'package:us_building_client/core/router/app_router_path.dart';
 import 'package:us_building_client/data/models/service_model.dart';
 
+import '../../bloc/service/service_bloc.dart';
 import '../../data/static/app_value.dart';
 import '../../utils/ui_render.dart';
 
@@ -18,7 +22,11 @@ class ServiceListItem extends StatefulWidget {
 class _ServiceListItemState extends State<ServiceListItem> {
   bool isLiked = false;
 
-  void _selectService() {}
+  void _selectService() {
+    context.read<ServiceBloc>().add(OnBookServiceEvent(widget.service));
+
+    context.router.pushNamed(AppRouterPath.booking);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -45,10 +45,32 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const IndexScreen(),
       );
     },
+    OrderListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OrderListScreen(),
+      );
+    },
+    PhoneOtpVerificationRoute.name: (routeData) {
+      final args = routeData.argsAs<PhoneOtpVerificationRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: PhoneOtpVerificationScreen(
+          key: args.key,
+          phoneNumber: args.phoneNumber,
+        ),
+      );
+    },
     RegisterRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const RegisterScreen(),
+      );
+    },
+    ServiceBookingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ServiceBookingScreen(),
       );
     },
     ServiceListRoute.name: (routeData) {
@@ -62,12 +84,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     WebViewRoute.name: (routeData) {
-      final args = routeData.argsAs<WebViewRouteArgs>();
+      final args = routeData.argsAs<WebViewRouteArgs>(
+          orElse: () => const WebViewRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: WebViewScreen(
           key: args.key,
-          code: args.code,
+          url: args.url,
         ),
       );
     },
@@ -145,6 +168,59 @@ class IndexRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [OrderListScreen]
+class OrderListRoute extends PageRouteInfo<void> {
+  const OrderListRoute({List<PageRouteInfo>? children})
+      : super(
+          OrderListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OrderListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PhoneOtpVerificationScreen]
+class PhoneOtpVerificationRoute
+    extends PageRouteInfo<PhoneOtpVerificationRouteArgs> {
+  PhoneOtpVerificationRoute({
+    Key? key,
+    required String phoneNumber,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PhoneOtpVerificationRoute.name,
+          args: PhoneOtpVerificationRouteArgs(
+            key: key,
+            phoneNumber: phoneNumber,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'PhoneOtpVerificationRoute';
+
+  static const PageInfo<PhoneOtpVerificationRouteArgs> page =
+      PageInfo<PhoneOtpVerificationRouteArgs>(name);
+}
+
+class PhoneOtpVerificationRouteArgs {
+  const PhoneOtpVerificationRouteArgs({
+    this.key,
+    required this.phoneNumber,
+  });
+
+  final Key? key;
+
+  final String phoneNumber;
+
+  @override
+  String toString() {
+    return 'PhoneOtpVerificationRouteArgs{key: $key, phoneNumber: $phoneNumber}';
+  }
+}
+
+/// generated route for
 /// [RegisterScreen]
 class RegisterRoute extends PageRouteInfo<void> {
   const RegisterRoute({List<PageRouteInfo>? children})
@@ -154,6 +230,20 @@ class RegisterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ServiceBookingScreen]
+class ServiceBookingRoute extends PageRouteInfo<void> {
+  const ServiceBookingRoute({List<PageRouteInfo>? children})
+      : super(
+          ServiceBookingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ServiceBookingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -201,13 +291,13 @@ class ServiceListRouteArgs {
 class WebViewRoute extends PageRouteInfo<WebViewRouteArgs> {
   WebViewRoute({
     Key? key,
-    required String code,
+    String? url,
     List<PageRouteInfo>? children,
   }) : super(
           WebViewRoute.name,
           args: WebViewRouteArgs(
             key: key,
-            code: code,
+            url: url,
           ),
           initialChildren: children,
         );
@@ -221,15 +311,15 @@ class WebViewRoute extends PageRouteInfo<WebViewRouteArgs> {
 class WebViewRouteArgs {
   const WebViewRouteArgs({
     this.key,
-    required this.code,
+    this.url,
   });
 
   final Key? key;
 
-  final String code;
+  final String? url;
 
   @override
   String toString() {
-    return 'WebViewRouteArgs{key: $key, code: $code}';
+    return 'WebViewRouteArgs{key: $key, url: $url}';
   }
 }

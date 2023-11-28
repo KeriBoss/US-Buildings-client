@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
+import 'package:us_building_client/views/screens/webview_screen.dart';
 
-import '../bloc/webview/webview_bloc.dart';
 import '../data/static/enum/local_storage_enum.dart';
 import '../main.dart';
 import 'local_storage_service.dart';
@@ -31,6 +31,11 @@ class FirebaseMessageService {
       sound: true,
     );
 
+    if (Platform.isIOS) {
+      final fcmToken = await firebaseMessaging.getAPNSToken();
+      debugPrint('APNS token: $fcmToken');
+    }
+
     // get FCM token for this device
     final fcmToken = await firebaseMessaging.getToken();
     debugPrint('FCM token: $fcmToken');
@@ -50,23 +55,31 @@ class FirebaseMessageService {
     debugPrint('Finish notification initiation');
   }
 
+  // handle events from Firebase message notification
   Future initFirebaseMessagePushNotifications() async {
     try {
       // user for IOS, config foreground message options
-      await FirebaseMessaging.instance
-          .setForegroundNotificationPresentationOptions(
+      await firebaseMessaging.setForegroundNotificationPresentationOptions(
         alert: true,
         badge: true,
         sound: true,
       );
 
       // event handler when application is opened from terminated state
-      FirebaseMessaging.instance.getInitialMessage().then((message) {
-        FlutterAppBadger.removeBadge();
+      firebaseMessaging.getInitialMessage().then((message) async {
+        if (message != null) {
+          FlutterAppBadger.removeBadge();
 
-        debugPrint('Title: ${message?.notification?.title}');
-        debugPrint('Body: ${message?.notification?.body}');
-        debugPrint('Data: ${message?.data}');
+          debugPrint('Title: ${message.notification?.title}');
+          debugPrint('Body: ${message.notification?.body}');
+          debugPrint('Data: ${message.data}');
+
+          context.router.pushWidget(WebViewScreen(
+            url: message.data['link'],
+          ));
+        } else {
+          debugPrint('No message from terminated state');
+        }
       });
 
       // event handler when user press on the message
@@ -76,6 +89,10 @@ class FirebaseMessageService {
         debugPrint('Title: ${message.notification?.title}');
         debugPrint('Body: ${message.notification?.body}');
         debugPrint('Data: ${message.data}');
+
+        appRouter.pushWidget(WebViewScreen(
+          url: message.data['link'],
+        ));
       });
 
       // application gets a message when it is in the background or terminated
@@ -179,6 +196,7 @@ class FirebaseMessageService {
     }
   }
 
+  // handle events from local notification
   Future initLocalNotifications() async {
     const android = AndroidInitializationSettings('@drawable/ic_launcher');
     const ios = DarwinInitializationSettings();
@@ -199,16 +217,33 @@ class FirebaseMessageService {
         debugPrint('Data: ${message.data}');
         debugPrint('Payload: ${jsonDecode(notiResponse.payload!)}');
 
-        context.read<WebviewBloc>().add(
-              OnLoadWebviewEvent(message.data['link']),
-            );
+        appRouter.pushWidget(WebViewScreen(
+          url: message.data['link'],
+        ));
       },
+      // onDidReceiveBackgroundNotificationResponse: handleBackgroundLocalMessage,
     );
 
     final platform = localNotification.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();
 
     await platform?.createNotificationChannel(androidChannel);
+  }
+
+  void runWhileAppIsTerminated() async {
+    final details = await localNotification.getNotificationAppLaunchDetails();
+
+    if (details!.didNotificationLaunchApp) {
+      if (details.notificationResponse!.payload != null) {
+        Map<String, dynamic> jsonMap = jsonDecode(
+          details.notificationResponse!.payload!,
+        );
+
+        appRouter.pushWidget(WebViewScreen(
+          url: jsonMap['link'],
+        ));
+      }
+    }
   }
 
   static Future<void> subscribeToTopic(String topic) async {

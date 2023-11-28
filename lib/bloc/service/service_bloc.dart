@@ -16,6 +16,8 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
   List<ServiceModel> serviceLv2List = [];
   List<ServiceModel> serviceList = [];
 
+  ServiceModel? currentSelectedService;
+
   ServiceBloc(this._serviceRepository) : super(ServiceInitial()) {
     on<OnLoadServiceLv1ListEvent>((event, emit) async {
       emit(ServiceLv1ListLoadingState());
@@ -93,6 +95,10 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
         );
         emit(ServiceErrorState(e.toString()));
       }
+    });
+
+    on<OnBookServiceEvent>((event, emit) {
+      currentSelectedService = event.newService;
     });
   }
 }

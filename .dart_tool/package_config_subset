@@ -68,8 +68,8 @@ file:///Users/kericloud/.pub-cache/hosted/pub.dev/built_collection-5.1.1/
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/built_collection-5.1.1/lib/
 built_value
 2.12
-file:///Users/kericloud/.pub-cache/hosted/pub.dev/built_value-8.7.0/
-file:///Users/kericloud/.pub-cache/hosted/pub.dev/built_value-8.7.0/lib/
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/built_value-8.8.0/
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/built_value-8.8.0/lib/
 cached_network_image
 3.0
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/cached_network_image-3.3.0/
@@ -134,6 +134,10 @@ dio
 2.15
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/dio-5.3.4/
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/dio-5.3.4/lib/
+dotted_border
+2.12
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/dotted_border-2.1.0/
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/dotted_border-2.1.0/lib/
 dropdown_textfield
 2.15
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/dropdown_textfield-1.0.8/
@@ -220,8 +224,8 @@ file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3/
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3/lib/
 flutter_local_notifications
 2.17
-file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_local_notifications-16.1.0/
-file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_local_notifications-16.1.0/lib/
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_local_notifications-16.2.0/
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_local_notifications-16.2.0/lib/
 flutter_local_notifications_linux
 2.17
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/flutter_local_notifications_linux-4.0.0+1/
@@ -326,6 +330,14 @@ path
 2.12
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/path-1.8.3/
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/path-1.8.3/lib/
+path_drawing
+2.12
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/path_drawing-1.0.1/
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/path_drawing-1.0.1/lib/
+path_parsing
+2.12
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/path_parsing-1.0.1/
+file:///Users/kericloud/.pub-cache/hosted/pub.dev/path_parsing-1.0.1/lib/
 path_provider
 2.19
 file:///Users/kericloud/.pub-cache/hosted/pub.dev/path_provider-2.1.1/

@@ -7,7 +7,10 @@ import '../../views/screens/booking_screen.dart';
 import '../../views/screens/contact_screen.dart';
 import '../../views/screens/home_screen.dart';
 import '../../views/screens/index_screen.dart';
+import '../../views/screens/order_list_screen.dart';
+import '../../views/screens/phone_otp_verification_screen.dart';
 import '../../views/screens/register_screen.dart';
+import '../../views/screens/service_booking_screen.dart';
 import '../../views/screens/service_list_screen.dart';
 import '../../views/screens/webview_screen.dart';
 import 'app_router_path.dart';
@@ -20,17 +23,10 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-        // AutoRoute(
-        //   page: IndexRoute.page,
-        //   path: AppRouterPath.index,
-        //   children: [
-        //     AutoRoute(path: AppRouterPath.home, page: HomeRoute.page),
-        //     AutoRoute(path: AppRouterPath.booking, page: BookingRoute.page),
-        //     AutoRoute(path: AppRouterPath.contact, page: ContactRoute.page),
-        //     AutoRoute(path: AppRouterPath.account, page: AccountRoute.page),
-        //   ],
-        //   initial: true,
-        // ),
+        AutoRoute(
+          page: BookingRoute.page,
+          path: AppRouterPath.booking,
+        ),
         AutoRoute(
           page: HomeRoute.page,
           path: AppRouterPath.home,
@@ -59,6 +55,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: RegisterRoute.page,
           path: AppRouterPath.register,
+        ),
+        AutoRoute(
+          page: PhoneOtpVerificationRoute.page,
+          path: AppRouterPath.phoneOtpVerification,
         ),
       ];
 }

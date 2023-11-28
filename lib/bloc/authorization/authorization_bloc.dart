@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 
 import '../../data/models/user.dart';
 import '../../data/repositories/authorization_repository.dart';
-import '../../data/static/app_value.dart';
-import '../../services/firebase_message_service.dart';
 
 part 'authorization_event.dart';
 part 'authorization_state.dart';

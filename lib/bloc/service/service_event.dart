@@ -20,3 +20,9 @@ class OnLoadServiceListEvent extends ServiceEvent {
 
   const OnLoadServiceListEvent(this.serviceLv2Name);
 }
+
+class OnBookServiceEvent extends ServiceEvent {
+  final ServiceModel newService;
+
+  const OnBookServiceEvent(this.newService);
+}
