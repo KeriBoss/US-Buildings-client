@@ -12,6 +12,7 @@ import 'package:us_building_client/views/widgets/service_lv2_bottom_dialog.dart'
 
 import '../../bloc/service/service_bloc.dart';
 import '../../data/models/service_model.dart';
+import '../../services/firebase_messaging_service.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -69,6 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     LoadingService(context).reloadHomePage();
+    FirebaseMessagingService.startListeningNotificationEvents(context);
+
     super.initState();
   }
 

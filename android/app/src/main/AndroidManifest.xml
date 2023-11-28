@@ -1,11 +1,15 @@
 <manifest xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.keri.us_building_client">
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
         android:networkSecurityConfig="@xml/network_security_config"
         android:label="us_building_client"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        tools:targetApi="n">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -14,6 +18,7 @@
             android:stopWithTask="false"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
+
             android:windowSoftInputMode="adjustResize"
             tools:targetApi="ice_cream_sandwich">
             <!-- Specifies an Android theme to apply to this Activity as soon as

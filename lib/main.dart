@@ -5,15 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:us_building_client/bloc/authorization/authorization_bloc.dart';
 import 'package:us_building_client/bloc/service/service_bloc.dart';
 import 'package:us_building_client/data/repositories/authorization_repository.dart';
 import 'package:us_building_client/data/repositories/service_repository.dart';
-import 'package:us_building_client/services/firebase_message_service.dart';
+import 'package:us_building_client/services/firebase_messaging_service.dart';
 
 import 'bloc/webview/webview_bloc.dart';
 import 'core/config/dio_config.dart';
@@ -32,22 +30,11 @@ final AppRouter appRouter = AppRouter();
 final FirebaseAuth auth = FirebaseAuth.instance;
 final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
-final localNotification = FlutterLocalNotificationsPlugin();
-
-const androidChannel = AndroidNotificationChannel(
-  'high_importance_channel',
-  'High Importance Notification',
-  description: 'This channel is for important notifications',
-  importance: Importance.max,
-);
-
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 // handle event of message at background
 @pragma('vm:entry-point')
 Future<void> handleBackgroundMessage(RemoteMessage? message) async {
-  FlutterAppBadger.updateBadgeCount(1);
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -56,18 +43,6 @@ Future<void> handleBackgroundMessage(RemoteMessage? message) async {
   //
   // await FirebaseMessageService.initFirebaseMessagePushNotifications();
   // await FirebaseMessageService.initLocalNotifications();
-}
-
-@pragma('vm:entry-point')
-Future<void> handleBackgroundLocalMessage(NotificationResponse? res) async {
-  FlutterAppBadger.updateBadgeCount(1);
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  // FirebaseMessageService.runWhileAppIsTerminated();
-  //
-  // await FirebaseMessageService.initNotifications();
 }
 
 Future<void> main() async {
@@ -81,7 +56,14 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.onBackgroundMessage(
+    FirebaseMessagingService.firebaseMessagingBackgroundHandler,
+  );
 
+  await FirebaseMessagingService.initializeLocalNotifications(debug: true);
+  await FirebaseMessagingService.initializeRemoteNotifications(debug: true);
+  await FirebaseMessagingService.initializeIsolateReceivePort();
+  await FirebaseMessagingService.getInitialNotificationAction();
   // FirebaseMessageService.runWhileAppIsTerminated();
 
   runApp(
@@ -119,6 +101,8 @@ Future<void> main() async {
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   State<MyApp> createState() => _MyHomePageState();
 }
@@ -126,8 +110,10 @@ class MyApp extends StatefulWidget {
 class _MyHomePageState extends State<MyApp> {
   @override
   void initState() {
-    FirebaseMessageService(context).initNotifications();
     super.initState();
+
+    FirebaseMessagingService.checkPermission();
+    FirebaseMessagingService.requestFirebaseToken();
   }
 
   @override
