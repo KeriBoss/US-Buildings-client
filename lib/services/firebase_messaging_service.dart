@@ -31,8 +31,8 @@ class FirebaseMessagingService extends ChangeNotifier {
       null,
       [
         NotificationChannel(
-          channelKey: 'alerts',
-          channelName: 'Alerts',
+          channelKey: 'remoteNotification',
+          channelName: 'Remote notification',
           channelDescription: 'Notification alerts',
           playSound: true,
           importance: NotificationImportance.High,
@@ -115,6 +115,7 @@ class FirebaseMessagingService extends ChangeNotifier {
     BuildContext context,
   ) async {
     debugPrint('Pressed on Notification');
+    print(receivedAction.toMap());
     debugPrint('Title: ${receivedAction.title ?? 'NULL'}');
     debugPrint('Body: ${receivedAction.body ?? 'NULL'}');
     debugPrint('Large icon url: ${receivedAction.largeIcon ?? 'NULL'}');

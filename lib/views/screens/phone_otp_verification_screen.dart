@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:us_building_client/core/extension/number_extension.dart';
+import 'package:us_building_client/data/models/service_order_model.dart';
 import 'package:us_building_client/views/widgets/gradient_button.dart';
 
+import '../../bloc/service/service_bloc.dart';
 import '../../data/static/app_value.dart';
 import '../../main.dart';
 import '../../services/firebase_sms_service.dart';
@@ -12,9 +15,14 @@ import '../../utils/ui_render.dart';
 
 @RoutePage()
 class PhoneOtpVerificationScreen extends StatefulWidget {
-  const PhoneOtpVerificationScreen({super.key, required this.phoneNumber});
+  const PhoneOtpVerificationScreen({
+    super.key,
+    required this.phoneNumber,
+    required this.newServiceOrder,
+  });
 
   final String phoneNumber;
+  final ServiceOrderModel newServiceOrder;
 
   @override
   State<StatefulWidget> createState() => _PhoneOtpVerificationScreenState();
@@ -34,10 +42,9 @@ class _PhoneOtpVerificationScreenState
       );
 
       await auth.signInWithCredential(credential).then((value) {
-        UiRender.showSnackBar(
-          context,
-          'Đã đăng kí đơn hàng',
-        );
+        context.read<ServiceBloc>().add(
+              OnCreateNewOrderEvent(widget.newServiceOrder),
+            );
 
         context.router.pop();
       });

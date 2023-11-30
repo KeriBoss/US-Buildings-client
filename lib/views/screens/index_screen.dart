@@ -18,7 +18,7 @@ class _IndexScreenState extends State<IndexScreen> {
     return AutoTabsRouter.pageView(
       routes: const [
         HomeRoute(),
-        BookingRoute(),
+        ScheduleRoute(),
         ContactRoute(),
         AccountRoute(),
       ],
@@ -32,7 +32,7 @@ class _IndexScreenState extends State<IndexScreen> {
           body: child,
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
-            currentIndex: pageController.initialPage,
+            currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
             items: [
               BottomNavigationBarItem(
@@ -45,11 +45,11 @@ class _IndexScreenState extends State<IndexScreen> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.logo_dev_outlined,
+                  Icons.calendar_month,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                label: 'Tiện ích',
+                label: 'Đặt lịch',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
@@ -57,7 +57,7 @@ class _IndexScreenState extends State<IndexScreen> {
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                label: 'Liên hê',
+                label: 'Liên hệ',
               ),
               BottomNavigationBarItem(
                 icon: Icon(

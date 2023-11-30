@@ -8,8 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:us_building_client/bloc/authorization/authorization_bloc.dart';
+import 'package:us_building_client/bloc/google_map/google_map_bloc.dart';
+import 'package:us_building_client/bloc/repair_man/repair_man_bloc.dart';
 import 'package:us_building_client/bloc/service/service_bloc.dart';
 import 'package:us_building_client/data/repositories/authorization_repository.dart';
+import 'package:us_building_client/data/repositories/google_map_repository.dart';
+import 'package:us_building_client/data/repositories/repair_man_repository.dart';
 import 'package:us_building_client/data/repositories/service_repository.dart';
 import 'package:us_building_client/services/firebase_messaging_service.dart';
 
@@ -20,7 +24,7 @@ import 'core/router/app_router_config.dart';
 import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
 
-const apiKey = 'AIzaSyAORtYhclWmVTCjaK9-rDJmNx0A4U7O7qY';
+const apiKey = 'AIzaSyD6gX16L5ApuMcOr-RHoRLmXXVDL-W2Rpo';
 const webServerKey =
     'AAAAA7lT6kE:APA91bEWMGqhsy3aaxQQLpEp37k8Tt622jWWrFZbfeujPl-fuxxSI0ihn-u6YbqKy_M7PJIs_rKbtpe-aAwYUPvoT7DZ_y5PdEszX8R-4Q0vmn9NnGwYQBtbwlO_vlesdyPM-XYZkYiz';
 
@@ -75,6 +79,12 @@ Future<void> main() async {
         RepositoryProvider<AuthorizationRepository>(
           create: (context) => AuthorizationRepository(),
         ),
+        RepositoryProvider<GoogleMapRepository>(
+          create: (context) => GoogleMapRepository(),
+        ),
+        RepositoryProvider<RepairManRepository>(
+          create: (context) => RepairManRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -83,9 +93,19 @@ Future<void> main() async {
               RepositoryProvider.of<ServiceRepository>(context),
             ),
           ),
+          BlocProvider<GoogleMapBloc>(
+            create: (context) => GoogleMapBloc(
+              RepositoryProvider.of<GoogleMapRepository>(context),
+            ),
+          ),
           BlocProvider<AuthorizationBloc>(
             create: (context) => AuthorizationBloc(
               RepositoryProvider.of<AuthorizationRepository>(context),
+            ),
+          ),
+          BlocProvider<RepairManBloc>(
+            create: (context) => RepairManBloc(
+              RepositoryProvider.of<RepairManRepository>(context),
             ),
           ),
           BlocProvider<WebviewBloc>(

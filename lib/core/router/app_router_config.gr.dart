@@ -45,6 +45,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const IndexScreen(),
       );
     },
+    MapRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MapScreen(),
+      );
+    },
     OrderListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -58,6 +64,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: PhoneOtpVerificationScreen(
           key: args.key,
           phoneNumber: args.phoneNumber,
+          newServiceOrder: args.newServiceOrder,
         ),
       );
     },
@@ -65,6 +72,23 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const RegisterScreen(),
+      );
+    },
+    ScheduleRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ScheduleScreen(),
+      );
+    },
+    SearchingRoute.name: (routeData) {
+      final args = routeData.argsAs<SearchingRouteArgs>(
+          orElse: () => const SearchingRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SearchingScreen(
+          key: args.key,
+          isFromLocation: args.isFromLocation,
+        ),
       );
     },
     ServiceBookingRoute.name: (routeData) {
@@ -168,6 +192,20 @@ class IndexRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MapScreen]
+class MapRoute extends PageRouteInfo<void> {
+  const MapRoute({List<PageRouteInfo>? children})
+      : super(
+          MapRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MapRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [OrderListScreen]
 class OrderListRoute extends PageRouteInfo<void> {
   const OrderListRoute({List<PageRouteInfo>? children})
@@ -188,12 +226,14 @@ class PhoneOtpVerificationRoute
   PhoneOtpVerificationRoute({
     Key? key,
     required String phoneNumber,
+    required ServiceOrderModel newServiceOrder,
     List<PageRouteInfo>? children,
   }) : super(
           PhoneOtpVerificationRoute.name,
           args: PhoneOtpVerificationRouteArgs(
             key: key,
             phoneNumber: phoneNumber,
+            newServiceOrder: newServiceOrder,
           ),
           initialChildren: children,
         );
@@ -208,15 +248,18 @@ class PhoneOtpVerificationRouteArgs {
   const PhoneOtpVerificationRouteArgs({
     this.key,
     required this.phoneNumber,
+    required this.newServiceOrder,
   });
 
   final Key? key;
 
   final String phoneNumber;
 
+  final ServiceOrderModel newServiceOrder;
+
   @override
   String toString() {
-    return 'PhoneOtpVerificationRouteArgs{key: $key, phoneNumber: $phoneNumber}';
+    return 'PhoneOtpVerificationRouteArgs{key: $key, phoneNumber: $phoneNumber, newServiceOrder: $newServiceOrder}';
   }
 }
 
@@ -232,6 +275,58 @@ class RegisterRoute extends PageRouteInfo<void> {
   static const String name = 'RegisterRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ScheduleScreen]
+class ScheduleRoute extends PageRouteInfo<void> {
+  const ScheduleRoute({List<PageRouteInfo>? children})
+      : super(
+          ScheduleRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ScheduleRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SearchingScreen]
+class SearchingRoute extends PageRouteInfo<SearchingRouteArgs> {
+  SearchingRoute({
+    Key? key,
+    bool isFromLocation = true,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SearchingRoute.name,
+          args: SearchingRouteArgs(
+            key: key,
+            isFromLocation: isFromLocation,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchingRoute';
+
+  static const PageInfo<SearchingRouteArgs> page =
+      PageInfo<SearchingRouteArgs>(name);
+}
+
+class SearchingRouteArgs {
+  const SearchingRouteArgs({
+    this.key,
+    this.isFromLocation = true,
+  });
+
+  final Key? key;
+
+  final bool isFromLocation;
+
+  @override
+  String toString() {
+    return 'SearchingRouteArgs{key: $key, isFromLocation: $isFromLocation}';
+  }
 }
 
 /// generated route for

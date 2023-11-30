@@ -9,6 +9,12 @@ abstract class ServiceEvent extends Equatable {
 
 class OnLoadServiceLv1ListEvent extends ServiceEvent {}
 
+class OnLoadServiceOrderListEvent extends ServiceEvent {
+  final String phoneNumber;
+
+  const OnLoadServiceOrderListEvent(this.phoneNumber);
+}
+
 class OnLoadServiceLv2ListEvent extends ServiceEvent {
   final String serviceLv1Name;
 
@@ -25,4 +31,10 @@ class OnBookServiceEvent extends ServiceEvent {
   final ServiceModel newService;
 
   const OnBookServiceEvent(this.newService);
+}
+
+class OnCreateNewOrderEvent extends ServiceEvent {
+  final ServiceOrderModel newServiceOrder;
+
+  const OnCreateNewOrderEvent(this.newServiceOrder);
 }

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:us_building_client/data/models/service_order_model.dart';
 import 'package:us_building_client/data/static/enum/database_table_enum.dart';
 
 import '../../data/models/service_model.dart';
@@ -15,8 +16,10 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
   List<ServiceModel> serviceLv1List = [];
   List<ServiceModel> serviceLv2List = [];
   List<ServiceModel> serviceList = [];
+  List<ServiceOrderModel> serviceOrderList = [];
 
   ServiceModel? currentSelectedService;
+  ServiceOrderModel? currentSelectedServiceOrder;
 
   ServiceBloc(this._serviceRepository) : super(ServiceInitial()) {
     on<OnLoadServiceLv1ListEvent>((event, emit) async {
@@ -97,8 +100,59 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
       }
     });
 
-    on<OnBookServiceEvent>((event, emit) {
+    on<OnBookServiceEvent>((event, emit) async {
       currentSelectedService = event.newService;
+    });
+
+    on<OnLoadServiceOrderListEvent>((event, emit) async {
+      emit(ServiceLoadingState());
+
+      try {
+        final response = await _serviceRepository.getServiceOrderModelList(
+          queryMap: {
+            'fieldname': 'sodienthoai',
+            'fieldvalue': event.phoneNumber,
+          },
+        );
+
+        response.fold(
+          (failure) => emit(ServiceErrorState(failure.message)),
+          (list) {
+            serviceOrderList = List.of(list.reversed);
+
+            emit(ServiceOrderListLoadedState(list));
+          },
+        );
+      } catch (e, stackTrace) {
+        debugPrint(
+          'Caught ERROR: ${e.toString()} \n${stackTrace.toString()}',
+        );
+        emit(ServiceErrorState(e.toString()));
+      }
+    });
+
+    on<OnCreateNewOrderEvent>((event, emit) async {
+      emit(ServiceLoadingState());
+
+      try {
+        final response = await _serviceRepository.createNewServiceOrder(
+          event.newServiceOrder,
+        );
+
+        response.fold(
+          (failure) => emit(ServiceErrorState(failure.message)),
+          (success) {
+            currentSelectedServiceOrder = event.newServiceOrder;
+
+            emit(ServiceOrderCreatedState(success.message));
+          },
+        );
+      } catch (e, stackTrace) {
+        debugPrint(
+          'Caught ERROR: ${e.toString()} \n${stackTrace.toString()}',
+        );
+        emit(ServiceErrorState(e.toString()));
+      }
     });
   }
 }

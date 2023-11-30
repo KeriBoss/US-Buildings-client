@@ -1,6 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-@JsonSerializable()
 class ServiceModel {
   String id;
   String? createdDate;
@@ -36,15 +33,15 @@ class ServiceModel {
         userId: json['userid'] as String?,
       );
 
-  Map<String, dynamic> toJson(ServiceModel instance) => <String, dynamic>{
-        'id': instance.id,
-        'created_date': instance.createdDate,
-        'tendichvucap1': instance.serviceLv1Name,
-        'tendichvucap2': instance.serviceLv2Name,
-        'tendichvu': instance.serviceName,
-        'hinhanhicon': instance.iconUrl,
-        'mota': instance.description,
-        'gia': instance.price,
-        'userid': instance.userId,
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'id': id,
+        'created_date': createdDate,
+        'tendichvucap1': serviceLv1Name,
+        'tendichvucap2': serviceLv2Name,
+        'tendichvu': serviceName,
+        'hinhanhicon': iconUrl,
+        'mota': description,
+        'gia': price,
+        'userid': userId,
       };
 }
