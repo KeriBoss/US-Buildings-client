@@ -3,6 +3,8 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:us_building_client/data/static/enum/database_table_enum.dart';
+
 class ValueRender {
   ValueRender._();
 
@@ -30,5 +32,17 @@ class ValueRender {
 
   static String getFileExtension(String fileName) {
     return ".${fileName.split('.').last}";
+  }
+
+  static Map<String, dynamic> requestBodyForNewData(
+    DatabaseTableEnum table,
+    Map<String, dynamic> body,
+  ) {
+    Map<String, dynamic> requestParam = {
+      'tablename': table.name,
+      DatabaseActionEnum.submitnew.name: DatabaseActionEnum.submitnew.name,
+    }..addAll(body);
+
+    return requestParam;
   }
 }

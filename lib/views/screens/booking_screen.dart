@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:us_building_client/core/extension/number_extension.dart';
-import 'package:us_building_client/views/layout/layout.dart';
 import 'package:us_building_client/views/screens/order_list_screen.dart';
 import 'package:us_building_client/views/screens/service_booking_screen.dart';
+
+import '../layout/layout.dart';
 
 @RoutePage()
 class BookingScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: TabBarView(
                     children: [
                       ServiceBookingScreen(),
@@ -44,7 +45,7 @@ class _BookingScreenState extends State<BookingScreen> {
               ],
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 40.width),
+              margin: EdgeInsets.symmetric(horizontal: 20.width),
               height: 60.height,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.onPrimary,
@@ -94,7 +95,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   fontSize: 20.size,
                 ),
                 labelColor: Theme.of(context).colorScheme.onPrimary,
-                tabs: [
+                tabs: const [
                   Tab(
                     text: 'ĐẶT LỊCH',
                   ),

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:us_building_client/data/static/app_value.dart';
 
 import '../../core/router/app_router_config.dart';
 
@@ -24,8 +23,6 @@ class _LayoutState extends State<Layout> {
 
   void _selectBottomIconButton(int index) {
     context.router.replaceAll([_routeList[index]]);
-
-    AppValue.currentBottomBarIndex = index;
   }
 
   @override
@@ -49,46 +46,45 @@ class _LayoutState extends State<Layout> {
             : null,
       ),
       body: widget.body,
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        currentIndex: AppValue.currentBottomBarIndex,
-        showUnselectedLabels: true,
-        onTap: _selectBottomIconButton,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_month,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            label: 'Đặt lịch',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.apartment,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            label: 'Liên hê',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            label: 'Tài khoản',
-          ),
-        ],
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   backgroundColor: Theme.of(context).colorScheme.primary,
+      //   showUnselectedLabels: true,
+      //   onTap: _selectBottomIconButton,
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.home,
+      //         color: Theme.of(context).colorScheme.secondary,
+      //       ),
+      //       backgroundColor: Theme.of(context).colorScheme.primary,
+      //       label: 'Trang chủ',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.calendar_month,
+      //         color: Theme.of(context).colorScheme.secondary,
+      //       ),
+      //       backgroundColor: Theme.of(context).colorScheme.primary,
+      //       label: 'Đặt lịch',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.apartment,
+      //         color: Theme.of(context).colorScheme.secondary,
+      //       ),
+      //       backgroundColor: Theme.of(context).colorScheme.primary,
+      //       label: 'Liên hê',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.person,
+      //         color: Theme.of(context).colorScheme.secondary,
+      //       ),
+      //       backgroundColor: Theme.of(context).colorScheme.primary,
+      //       label: 'Tài khoản',
+      //     ),
+      //   ],
+      // ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       // floatingActionButton: context.router.current.path == AppRouterPath.home
       //     ? Padding(

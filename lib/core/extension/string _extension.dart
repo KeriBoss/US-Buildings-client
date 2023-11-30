@@ -35,4 +35,7 @@ extension FormatString on String {
 
     return jsonString;
   }
+
+  String get formatDateStringFromApi =>
+      substring(0, indexOf('T')).split('-').reversed.join('-');
 }

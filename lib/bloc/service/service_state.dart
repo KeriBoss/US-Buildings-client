@@ -51,6 +51,24 @@ class ServiceListLoadedState extends ServiceState {
   List<Object?> get props => [serviceList];
 }
 
+class ServiceOrderCreatedState extends ServiceState {
+  final String message;
+
+  const ServiceOrderCreatedState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class ServiceOrderListLoadedState extends ServiceState {
+  final List<ServiceOrderModel> serviceOrderList;
+
+  const ServiceOrderListLoadedState(this.serviceOrderList);
+
+  @override
+  List<Object?> get props => [serviceOrderList];
+}
+
 class ServiceErrorState extends ServiceState {
   final String message;
 

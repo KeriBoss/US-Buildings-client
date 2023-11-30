@@ -33,7 +33,6 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
   @override
   Widget build(BuildContext context) {
     return Layout(
-      canBack: true,
       body: RefreshIndicator(
         onRefresh: () => LoadingService(context).reloadServiceListPage(
           widget.serviceLv2.serviceLv2Name!,
